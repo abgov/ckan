@@ -613,6 +613,8 @@ def organization_update(context, data_dict):
     # Callers that set context['allow_partial_update'] = True can choose to not
     # specify particular keys and they will be left at their existing
     # values. This includes: users, groups, tags, extras
+    if 'extras' in data_dict and (type(data_dict['extras']) is str or type(data_dict['extras']) is unicode ):
+        data_dict['extras'] = json.loads(data_dict['extras'])
     return _group_or_org_update(context, data_dict, is_org=True)
 
 def user_update(context, data_dict):

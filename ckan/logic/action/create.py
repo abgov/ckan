@@ -851,6 +851,8 @@ def organization_create(context, data_dict):
     '''
     # wrapper for creating organizations
     data_dict.setdefault('type', 'organization')
+    if 'extras' in data_dict and (type(data_dict['extras']) is str or type(data_dict['extras']) is unicode ):
+        data_dict['extras'] = json.loads(data_dict['extras'])
     _check_access('organization_create', context, data_dict)
     return _group_or_org_create(context, data_dict, is_org=True)
 
